@@ -1,0 +1,23 @@
+{
+	"name": "ndpl",
+	"private": true,
+	"version": "0.0.1",
+	"description": "Offline Docker Deployment: Tools for deploying Docker based applications in air-gapped networks without internet access",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nhealthorg/ndpl.git"
+	},
+	"license": "MIT",
+	"type": "module",
+	"exports": {},
+	"scripts": {
+		"dev": "nuxi dev app"
+	},
+	"devDependencies": {
+		"nuxt": "3.14.159",
+		"unbuild": "^2.0.0"
+	},
+	"engines": {
+	  "node": ">=18.0.0"
+	}
+}
