@@ -11,10 +11,13 @@
 	"type": "module",
 	"exports": {},
 	"scripts": {
-		"dev": "nuxi dev app"
+		"dev": "nuxi dev app",
+		"prepare": "nuxi prepare app",
+		"docker": "docker compose -f ./docker-compose.yml up --force-recreate --build --watch"
 	},
 	"devDependencies": {
 		"nuxt": "3.14.159",
+		"@nuxt/ui": "3.0.0-alpha.10",
 		"unbuild": "^2.0.0"
 	},
 	"engines": {
