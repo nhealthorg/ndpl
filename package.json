@@ -18,7 +18,9 @@
 	"devDependencies": {
 		"nuxt": "3.14.159",
 		"@nuxt/ui": "3.0.0-alpha.10",
-		"unbuild": "^2.0.0"
+		"unbuild": "^2.0.0",
+		"@node-rs/argon2": "^2.0.0",
+		"zod": "^3.24.1"
 	},
 	"engines": {
 	  "node": ">=18.0.0"
