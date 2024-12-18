@@ -1,33 +1,52 @@
-import type { User } from "#shared/types";
+import { useDatabase } from "#imports";
+import z from "zod";
 
-// Fake users data
-const users: User[] = [
-  {
-    id: "41dbc5f7-9a4e-42e6-832b-1d3dd8c7c4b6",
-    email: "admin@gmail.com",
-    password: "$argon2id$v=19$m=19456,t=2,p=1$d39TKJ2+/qO+d5zjUfpp+A$z/ZBaHVbCfYQT/fSrpz8dc3Kz/rox7oEB7hLGeZzVLU", // password
-    roles: ["ADMIN"],
-  },
-  {
-    id: "d0065700-1707-4ad9-811b-8bbed0364318",
-    email: "user@gmail.com",
-    password: "$argon2id$v=19$m=19456,t=2,p=1$d39TKJ2+/qO+d5zjUfpp+A$z/ZBaHVbCfYQT/fSrpz8dc3Kz/rox7oEB7hLGeZzVLU", // password
-    roles: ["USER"],
-  },
-];
+export const UserSchema = z.object({
+  id: z.number().optional(),
+  email: z.string().email(),
+  password: z.string(),
+  first_name: z.string().nullable().optional(),
+  last_name: z.string().nullable().optional()
+});
 
-export async function getUsers() {
-  return users;
-}
+// type of user
+export type User = z.infer<typeof UserSchema>;
 
-export async function getUserByEmail(email: string) {
-  return users.find((user) => user.email === email);
-}
+export const useUser = () => {
+  const { getDatabase } = useDatabase()
+  const db = getDatabase()
 
-export async function getUserById(id: string) {
-  return users.find((user) => user.id === id);
-}
+  function validateUser(user: unknown, silent: boolean = true) {
+    const result = UserSchema.safeParse(user);
+    if (!result.success) {
+      // silent logging
+      if(silent) console.error(result.error.errors);
+      else throw new Error(result.error.message);
+    }
+    return result.data;
+  }
 
-export async function isAdmin(user?: User) {
-  return user && user.roles.includes("ADMIN");
+  async function getUserByEmail(email: string) {
+    let user = await db.prepare("SELECT * FROM user WHERE email = ?").get(email);
+    return validateUser(user);
+  }
+
+  async function createUser(user: User) {
+    const valUser = validateUser(user, false);
+    if(valUser){
+      await db.prepare("INSERT INTO user (email, password) VALUES (?, ?)").run(valUser.email, await hashPassword(valUser.password));
+    }
+    return valUser;
+  }
+
+  async function getUserById(id: string) {
+    const user = await db.prepare("SELECT * FROM user WHERE id = ?").get(id);
+    return validateUser(user);
+  }
+
+  return {
+    getUserByEmail,
+    createUser,
+    getUserById
+  }
 }

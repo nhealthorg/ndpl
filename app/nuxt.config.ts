@@ -4,6 +4,8 @@ const ONE_WEEK = ONE_DAY * 7;
 export default defineNuxtConfig({
   compatibilityDate: "2024-12-10",
   modules: [
+    '@nuxt/devtools',
+    '@nuxt/telemetry',
     '@nuxt/ui'
   ],
   devtools: {
@@ -17,6 +19,10 @@ export default defineNuxtConfig({
     cookieSecret: "secret",
     cookieExpires: ONE_DAY.toString(),
     cookieRememberMeExpires: ONE_WEEK.toString(),
+    admin: {
+      email: process.env.ADMIN_USER_EMAIL || '',
+      password: process.env.ADMIN_USER_PASSWORD || ''
+    }
   },
   css: ['~/assets/css/main.css']
 })

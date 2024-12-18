@@ -9,6 +9,8 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  const { getUserByEmail } = useUser();
+
   const userWithPassword = await getUserByEmail(email);
   if (!userWithPassword) {
     throw createError({
