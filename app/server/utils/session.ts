@@ -14,3 +14,16 @@ export async function getUserFromSession(event: H3Event) {
 
   return getUserById(session.userId);
 }
+
+export function isAuthenticated(event: H3Event) {
+  return Boolean(event.context.user);
+}
+
+export function checkAuthentication(event: H3Event) {
+  if (!isAuthenticated(event)) {
+    throw createError({
+      statusCode: 401,
+      message: "You don't have the rights to access this resource",
+    });
+  }
+}

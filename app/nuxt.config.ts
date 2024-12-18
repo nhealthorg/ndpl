@@ -24,5 +24,8 @@ export default defineNuxtConfig({
       password: process.env.ADMIN_USER_PASSWORD || ''
     }
   },
-  css: ['~/assets/css/main.css']
+  css: ['~/assets/css/main.css'],
+  ui: {
+    colorMode: false
+  }
 })

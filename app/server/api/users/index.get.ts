@@ -1,14 +1,10 @@
 export default defineEventHandler(async (event) => {
-  if (!isAdmin(event.context.user)) {
-    throw createError({
-      statusCode: 401,
-      message: "You don't have the rights to access this resource",
-    });
-  }
 
-  const usersWithPassword = await getUsers();
+  checkAuthentication(event);
 
-  const usersWithoutPassword = usersWithPassword.map(({ password, ...user }) => user);
+  const { getUser } = useUser();
 
-  return usersWithoutPassword;
+  const usersWithPassword = await getUser();
+
+  return usersWithPassword ? usersWithPassword.map(({ password, ...user }) => user) : [];
 });
