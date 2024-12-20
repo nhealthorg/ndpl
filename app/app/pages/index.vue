@@ -1,7 +1,29 @@
 <template>
 	<div>
 		<nav class="flex justify-end bg-white border-b border-gray-200 h-16 px-4 sm:px-10">
-			<UButton icon="i-heroicons-plus" label="Project" color="primary" class="self-center" />
+			<UModal
+				v-model:open="open"
+				title="Create Project"
+				description="Create a new project"
+				>
+				<UButton icon="i-heroicons-plus" label="Project" color="primary" class="self-center" />
+				<template #body>
+					<UForm ref="projectForm" :schema="ProjectSchema" :state="projectState" class="space-y-4" @submit="createProject">
+						<UFormField label="Project Name" name="name">
+							<UInput v-model="projectState.name" label="Project Name" placeholder="Enter project name" class="w-full" />
+						</UFormField>
+						<UFormField label="Description" name="description">
+							<UTextarea v-model="projectState.description" label="Description" placeholder="Enter project description" class="w-full" />
+						</UFormField>
+					</UForm>
+    			</template>
+				<template #footer>
+					<div class="flex justify-end space-x-4 w-full">
+						<UButton label="Cancel" color="neutral" />
+						<UButton label="Save" @click="submit" type="submit" color="primary" />
+					</div>
+				</template>
+			</UModal>
 		</nav>
 		<section>
 			<div class="container mx-auto px-4 sm:px-10 py-8 space-y-8">
@@ -16,11 +38,44 @@
   	</div>
 </template>
 <script setup lang="ts">
+	import type { FormSubmitEvent } from '#ui/types'
+	import { type Project, ProjectSchema } from '#shared/schema'
+
+
 	definePageMeta({
 		middleware: ["user-only"],
 	});
 
-	const { data: projects } = useFetch('/api/projects', {
+	const { data: projects, refresh } = await useFetch('/api/projects', {
 		method: 'GET',
 	})
+
+	const open = ref(false)
+
+	const projectState = ref({
+		name: undefined,
+		description: undefined
+	});
+
+	const projectForm = useTemplateRef('projectForm')
+
+	const submit = async () => {
+		projectForm.value?.submit()
+	}
+
+	async function createProject(payload: FormSubmitEvent<Project>) {
+		const { data, error } = await useFetch('/api/projects', {
+			method: 'POST',
+			body: projectState.value
+		})
+
+		if (!error) {
+			projectState.value = {
+				name: undefined,
+				description: undefined
+			}
+			refresh()
+		}
+		open.value = false
+	}
 </script>

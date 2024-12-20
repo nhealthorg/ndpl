@@ -5,7 +5,7 @@ export const useProject = () => {
 	const { getDatabase } = useDatabase()
   	const db = getDatabase()
 
-	async function getProjectById(id: string) {
+	async function getProjectById(id: string | undefined) {
 		const project = await db.prepare("SELECT * FROM project WHERE id = ?").get(id);
 		return validateData<Project>(project, ProjectSchema);
 	}
