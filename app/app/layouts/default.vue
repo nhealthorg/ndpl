@@ -2,9 +2,12 @@
  	<div>
 		<header class='flex shadow-md py-3 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'>
 			<div class='flex justify-between gap-5 w-full'>
-				<NuxtLink to="/"><img src="/nhealth_light.png" class="w-28" /></NuxtLink>
+				<div class="flex items-center gap-x-10">
+					<NuxtLink to="/"><img src="/nhealth_light.png" class="w-36" /></NuxtLink>
+					<UNavigationMenu :items="navItems" class="justify-center" />
+				</div>
 				<UDropdownMenu
-					:items="items"
+					:items="systemItems"
 					:content="{
 						side: 'bottom'
 					}">
@@ -18,7 +21,7 @@
   	</div>
 </template>
 <script setup lang="ts">
-    import type { DropdownMenuItem } from '#ui/types'
+    import type { DropdownMenuItem, NavigationMenuItem } from '#ui/types'
 
 	const { logout } = useAuth();
 
@@ -29,7 +32,7 @@
       t?: string
       disabled?: boolean
     }
-    const items = [
+    const systemItems = [
       [{
         label: 'Account',
         slot: 'account',
@@ -50,4 +53,18 @@
   		}
       }]
     ] as [Item][]
+
+	const navItems = [
+		{
+			label: 'Projects',
+			icon: 'i-heroicons-folder',
+			to: '/projects',
+			exact: false
+		},
+		{
+			label: 'Images',
+			icon: 'i-heroicons-cube',
+			to: '/images',
+		}
+  	] as NavigationMenuItem[]
 </script>

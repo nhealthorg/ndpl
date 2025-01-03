@@ -13,7 +13,8 @@
 	"scripts": {
 		"dev": "nuxi dev app",
 		"prepare": "nuxi prepare app",
-		"docker": "docker compose -f ./docker-compose.yml up --force-recreate --build --watch"
+		"docker": "docker compose -f ./docker-compose.yml up --force-recreate --build --watch",
+		"dokploy": "docker service create --replicas 1 --network dokploy-network --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock --mount type=bind,source=C:/Users/johan/Documents/Code/ndpl/dokploy,target=/etc/dokploy --publish published=3000,target=3000,mode=host --update-parallelism 1 --update-order stop-first dokploy/dokploy:latest"
 	},
 	"dependencies": {
 	},
@@ -21,8 +22,8 @@
 		"nitropack": "2.9.7"
 	},
 	"devDependencies": {
-		"nuxt": "3.14.159",
-		"@nuxt/kit": "3.14.1592",
+		"nuxt": "3.15.0",
+		"@nuxt/kit": "3.15.0",
 		"better-sqlite3": "^11.7.0",
 		"@types/better-sqlite3": "^7.6.12",
 		"@iconify-json/heroicons": "^1.2.2",

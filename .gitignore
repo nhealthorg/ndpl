@@ -1,3 +1,6 @@
+# TMP files -> will be removed after initital project setup
+dokploy
+
 # Logs
 logs
 *.log
