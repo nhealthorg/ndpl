@@ -1,5 +1,6 @@
 # ndpl
-Offline Docker Deployment: Tools for deploying Docker based applications in air-gapped networks without internet access
+Offline Docker Deployment: Tools for deploying Docker based applications in air-gapped networks without internet access.
+Terms: Infrastructure runtime / Continuous Integration/Continuous Deployment (CI/CD) pipelines
 
 ## TODO
 
