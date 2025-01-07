@@ -11,6 +11,7 @@ export default defineNuxtModule({
 	defaults: {
 		name: 'db',
 		filePath: '.data',
+		forceLatestMigration: false,
 	},
 	setup: async (options, nuxt) => {
 		const resolver = createResolver(import.meta.url)
@@ -43,7 +44,8 @@ export default defineNuxtModule({
 		// Add runtime config
 		nuxt.options.runtimeConfig = nuxt.options.runtimeConfig || {};
 		nuxt.options.runtimeConfig.database = {
-			file: resolver.resolve('..',options.filePath, `${options.name}.sqlite`)
+			file: resolver.resolve('..',options.filePath, `${options.name}.sqlite`),
+			forceLatestMigration: options.forceLatestMigration,
 		};
 	}
 })

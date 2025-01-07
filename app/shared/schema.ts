@@ -21,7 +21,7 @@ export const ImageSchema = z.object({
 	id: z.number().optional(),
 	name: z.string(),
 	description: z.string().nullable().optional(),
-  filePath: z.string().nullable().optional(),
+	uploaded: z.boolean().optional(),
 	created_at: z.string().optional(),
 });
 

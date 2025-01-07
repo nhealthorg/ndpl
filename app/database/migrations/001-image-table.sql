@@ -7,11 +7,11 @@ CREATE TABLE image (
   name TEXT NOT NULL,
   description TEXT,
   filePath TEXT,
+  uploaded BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 --------------------------------------------------------------------------------
 -- Down
 --------------------------------------------------------------------------------
-
 DROP TABLE image;

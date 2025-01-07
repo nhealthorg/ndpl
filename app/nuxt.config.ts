@@ -24,8 +24,19 @@ export default defineNuxtConfig({
       password: process.env.ADMIN_USER_PASSWORD || ''
     }
   },
+  database: {
+    forceLatestMigration: false
+  },
   css: ['~/assets/css/main.css'],
   ui: {
     colorMode: false
-  }
+  },
+  nitro: {
+    storage: {
+      images: {
+        driver: 'fs',
+        base: './app/.data/images'
+      }
+    }
+  },
 })
