@@ -11,8 +11,8 @@
 	"type": "module",
 	"exports": {},
 	"scripts": {
-		"dev": "nuxi dev app",
-		"prepare": "nuxi prepare app",
+		"dev": "nuxi dev src",
+		"prepare": "nuxi prepare src",
 		"docker": "docker compose -f ./docker-compose.yml up --force-recreate --build --watch",
 		"dokploy": "docker service create --replicas 1 --network dokploy-network --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock --mount type=bind,source=C:/Users/johan/Documents/Code/ndpl/dokploy,target=/etc/dokploy --publish published=3000,target=3000,mode=host --update-parallelism 1 --update-order stop-first dokploy/dokploy:latest"
 	},

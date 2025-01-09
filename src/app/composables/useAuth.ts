@@ -1,7 +1,7 @@
 import type { UserWithoutPassword } from "#shared/types";
 
 export const useAuth = () => {
-  const authUser = useAuthUser();
+  const authUser = useState<UserWithoutPassword | null>("user", () => null);
 
   const setUser = (user: UserWithoutPassword | null) => {
     authUser.value = user;
@@ -50,5 +50,6 @@ export const useAuth = () => {
     login,
     logout,
     me,
+    authUser
   };
 };

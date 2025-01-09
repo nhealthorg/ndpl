@@ -12,7 +12,7 @@ FROM base AS build
 COPY --link package.json package-lock.json ./
 RUN npm install
 
-COPY --link ./app ./app
+COPY --link ./src ./src
 
 # Run
 FROM base
