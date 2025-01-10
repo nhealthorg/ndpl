@@ -1,7 +1,8 @@
 import { defineCommand } from 'citty'
 import consola from 'consola'
 import Docker from 'dockerode'
-import inquirer from 'inquirer'
+//https://github.com/SBoudrias/Inquirer.js
+import { select } from '@inquirer/prompts';
 
 const command = defineCommand({
 	meta: {
@@ -17,16 +18,10 @@ const command = defineCommand({
 			all: true
 		})
 
-		inquirer.prompt([{
-			name: 'container',
+		const answer = await select({
 			message: 'Select a container',
-			step: 1,
-			type: 'list',
 			choices: containers.map(container => container.Names.join(',')),
-
-		}], async (answers) => {
-			console.log(answers)
-		})
+		});
 
 	}
 })

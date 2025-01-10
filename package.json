@@ -52,7 +52,7 @@
 		"std-env": "^3.8.0",
 		"dockerode": "^4.0.3",
 		"@types/dockerode": "^3.3.34",
-		"inquirer": "^12.3.0"
+		"@inquirer/prompts": "^7.2.1"
 	},
 	"engines": {
 		"node": ">=18.0.0"
