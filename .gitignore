@@ -1,5 +1,6 @@
 # TMP files -> will be removed after initital project setup
 dokploy
+src/.data
 
 # Logs
 logs

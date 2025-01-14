@@ -32,11 +32,5 @@ export default defineNuxtConfig({
     colorMode: false
   },
   nitro: {
-    storage: {
-      images: {
-        driver: 'fs',
-        base: './app/.data/images'
-      }
-    }
   },
 })

@@ -56,7 +56,7 @@
 			const formData = new FormData();
 			formData.append("file", file);
 			const response = await $fetch('/api/images/upload', {
-			method: 'POST',
+				method: 'POST',
 				body: formData
 			})
 			console.log(response)
