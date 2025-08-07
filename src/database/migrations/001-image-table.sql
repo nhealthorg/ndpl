@@ -8,6 +8,7 @@ CREATE TABLE image (
   description TEXT,
   filePath TEXT,
   uploaded BOOLEAN DEFAULT FALSE,
+  uploadToken TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

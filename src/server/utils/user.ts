@@ -1,5 +1,5 @@
 import { useDatabase } from "#imports";
-import { UserSchema, type User } from '#shared/schema'
+import { UserSchema, type User } from '#shared/db.schema'
 
 export const useUser = () => {
   const { getDatabase } = useDatabase()

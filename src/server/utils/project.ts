@@ -1,5 +1,5 @@
 import { useDatabase } from "#imports";
-import { ProjectSchema, type Project } from '#shared/schema'
+import { ProjectSchema, type Project } from '#shared/db.schema'
 
 export const useProject = () => {
 	const { getDatabase } = useDatabase()
@@ -18,7 +18,7 @@ export const useProject = () => {
 	async function createProject(project: Project) {
 		const valProject = validateData<Project>(project, ProjectSchema, false);
 		if(valProject){
-		await db.prepare("INSERT INTO project (name, description) VALUES (?, ?)").run(valProject.name, valProject.description);
+			await db.prepare("INSERT INTO project (name, description) VALUES (?, ?)").run(valProject.name, valProject.description);
 		}
 		return valProject;
 	}

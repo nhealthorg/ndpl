@@ -34,7 +34,7 @@
 		</div>
 </template>
 <script setup lang="ts">
-	import { type Image, ImageSchema } from '#shared/schema'
+	import { type Image, ImageSchema } from '#shared/db.schema'
 
 	definePageMeta({
 		middleware: ["user-only"],

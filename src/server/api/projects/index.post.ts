@@ -1,5 +1,5 @@
 import { useProject } from '#imports';
-import { ProjectSchema } from '#shared/schema';
+import { ProjectSchema } from '#shared/db.schema';
 
 
 export default defineEventHandler(async (event) => {

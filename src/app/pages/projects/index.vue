@@ -41,7 +41,7 @@
 </template>
 <script setup lang="ts">
 	import type { FormSubmitEvent } from '#ui/types'
-	import { type Project, ProjectSchema } from '#shared/schema'
+	import { type Project, ProjectSchema } from '#shared/db.schema'
 
 
 	definePageMeta({

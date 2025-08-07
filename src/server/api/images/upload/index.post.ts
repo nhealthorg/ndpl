@@ -14,9 +14,11 @@ const saveFile = async (path: string, file: Buffer, event: (progress: number) =>
 		uploadedSize += end - start;
 		event(uploadedSize / totalSize);
 	}
+	fileStream.end();
 }
 
 export default defineEventHandler(async(event) => {
+
 	const body = await readMultipartFormData(event);
 	const file = (body! as any[]).shift();
 
